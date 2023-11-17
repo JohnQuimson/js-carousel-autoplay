@@ -5,6 +5,9 @@ const slider = document.querySelector('.items');
 const next = document.querySelector('.next');
 const prev = document.querySelector('.prev');
 const container = document.querySelector('.container');
+const stop = document.querySelector('.stop');
+const play = document.querySelector('.play');
+
 //dichiaro quale slide[i] deve avere la class 'active'
 let slideAttivaIndex = 0;
 
@@ -64,7 +67,6 @@ let lunghDomSlides = domSlides.length - 1;
 //prendo in considerazione tutti gli elementi con class 'elem-raccolta', i quali vanno a finire in una specie di 'array'
 const domThumbnails = document.querySelectorAll('.elem-raccolta');
 let lunghDomThumbnails = domThumbnails.lenght - 1;
-console.log(domThumbnails);
 
 /*
 -------------------------
@@ -76,22 +78,17 @@ next.addEventListener('click', function () {
   domSlides[slideAttivaIndex].classList.remove('active');
   //Di default rimuovo la classe active-thumbnails al primo elemento
   domThumbnails[slideAttivaIndex].classList.remove('active-thumbnails');
-
-  //se il contatore del NodeList è minore del num di elementi dei NodeList, incrementa il contatore
+  //se il contatore del NodeList è minore del num di elementi dei NodeList, crementa il contatore
   if (slideAttivaIndex < lunghDomSlides) {
     slideAttivaIndex++;
-
     //se il contatore supera il limite, torna da capo
   } else {
     slideAttivaIndex = 0;
   }
-
   domSlides[slideAttivaIndex].classList.add('active');
   console.log('next');
   console.log(`Immgine con 'active': domSlides[${slideAttivaIndex}]`);
-
   domThumbnails[slideAttivaIndex].classList.add('active-thumbnails');
-
   console.log(
     `Immgine con 'active-thumbnails': domThumbnails[${slideAttivaIndex}]`
   );
@@ -148,3 +145,35 @@ for (let i = 0; i < domThumbnails.length; i++) {
     console.log(`Hai cliccato sull'elemento: thumbnails[${i}]`);
   });
 }
+
+function autoplayNext() {
+  //Di default rimuovo la classe active al primo elemento
+  domSlides[slideAttivaIndex].classList.remove('active');
+  //Di default rimuovo la classe active-thumbnails al primo elemento
+  domThumbnails[slideAttivaIndex].classList.remove('active-thumbnails');
+
+  //se il contatore del NodeList è minore del num di elementi dei NodeList, incrementa il contatore
+  if (slideAttivaIndex < lunghDomSlides) {
+    slideAttivaIndex++;
+
+    //se il contatore supera il limite, torna da capo
+  } else {
+    slideAttivaIndex = 0;
+  }
+
+  domSlides[slideAttivaIndex].classList.add('active');
+
+  console.log(`Immgine attiva: ${slideAttivaIndex + 1}`);
+
+  domThumbnails[slideAttivaIndex].classList.add('active-thumbnails');
+}
+
+let myFnNext;
+play.addEventListener('click', function () {
+  myFnNext = setInterval(autoplayNext, 3_000);
+  console.log('Avviato autoplay');
+});
+stop.addEventListener('click', function () {
+  console.log('Autoplay STOP');
+  clearInterval(myFnNext);
+});

@@ -109,3 +109,21 @@ h1 {
 .elem-raccolta:hover {
   cursor: pointer;
 }
+
+button {
+  padding: 3px 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button.stop {
+  background-color: #a7a9be;
+  color: 0f0e17;
+}
+
+button.play {
+  background-color: #ff8906;
+  color: white;
+}
