@@ -120,10 +120,20 @@ button {
 
 button.stop {
   background-color: #a7a9be;
-  color: 0f0e17;
+  color: #0f0e17;
 }
 
 button.play {
   background-color: #ff8906;
   color: white;
+}
+
+button.stop:hover {
+  background-color: #c3c4d1;
+  color: #292831;
+}
+
+button.play:hover {
+  background-color: #b46811;
+  color: rgb(211, 211, 211);
 }
