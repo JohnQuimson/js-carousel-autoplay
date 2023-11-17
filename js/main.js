@@ -169,9 +169,16 @@ function autoplayNext() {
 }
 
 let myFnNext;
+let autoplayActive = false;
 play.addEventListener('click', function () {
-  myFnNext = setInterval(autoplayNext, 3_000);
-  console.log('Avviato autoplay');
+  //condizione per non far attivare una seconda volta il setInterval
+  if (!autoplayActive) {
+    myFnNext = setInterval(autoplayNext, 3_000);
+    autoplayActive = true;
+    console.log('Avviato autoplay');
+  } else {
+    console.log('Non puoi cliccare di nuovo!');
+  }
 });
 stop.addEventListener('click', function () {
   console.log('Autoplay STOP');
